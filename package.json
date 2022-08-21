@@ -1,0 +1,27 @@
+{
+  "name": "idm-reservation-search-results-details-lib",
+  "version": "1.0.1",
+  "description": "search page, result list and popup details dialog",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChuangLiu-cc/idm-reservation-search-results-details-lib.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChuangLiu-cc/idm-reservation-search-results-details-lib/issues"
+  },
+  "homepage": "https://github.com/ChuangLiu-cc/idm-reservation-search-results-details-lib#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
