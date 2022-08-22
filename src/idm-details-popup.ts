@@ -8,6 +8,17 @@ export class DetailsPopup{
         this.tagid = tagid;
         const queryValue = "#" + tagid;
         const container = document.querySelector(queryValue)! as HTMLElement;
+        container.style.setProperty('display','none');
+        container.style.setProperty('position','fixed');
+        container.style.setProperty('z-index','8');
+        container.style.setProperty('left','0');
+        container.style.setProperty('top','0');
+        container.style.setProperty('width','100%');
+        container.style.setProperty('height','100%');
+        container.style.setProperty('overflow','auto');
+        container.style.setProperty('background-color','rgb(0, 0, 0)');
+        container.style.setProperty('background-color','rgba(0, 0, 0, 0.4)');
+
         this.popupDetailsDialog(container);
         //use container div to close popup form
         container.addEventListener('click', (e: Event) => {
@@ -20,6 +31,13 @@ export class DetailsPopup{
     popupDetailsDialog(container: any){
         //check popup container and display none => block to show in UI
         if(container.firstChild) container.removeChild(container.firstChild);
+        const extraOptions = [
+            {value:"extraBreakfast",viewValue:"Breakfast" },
+            {value:"extraTV",viewValue:"TV"},
+            {value:"extraWiFi",viewValue:"WiFi"},
+            {value:"extraParking",viewValue:"Parking"},
+            {value:"extraBalcony",viewValue:"Balcony"}
+        ];
         const formContainerDiv = document.createElement('div');
         formContainerDiv.setAttribute("id", "form-container");
         formContainerDiv.style.setProperty("padding", "25px");
@@ -84,11 +102,7 @@ export class DetailsPopup{
             </div>
             <div>
                 <select name="extras" id="extras">
-                    <option value="extraBreakfast">Breakfast</option>
-                    <option value="extraTV">TV</option>
-                    <option value="extraWiFi">WiFi</option>
-                    <option value="extraParking">Parking</option>
-                    <option value="extraBalcony">Balcony</option>
+                    
                 </select>
             </div>
             <div>
@@ -164,8 +178,24 @@ export class DetailsPopup{
         state.value = this.detailData.addressLocation.state;
         const city = <HTMLInputElement>document.getElementById("city");
         city.value = this.detailData.addressLocation.city;
-        const extras = <HTMLInputElement>document.getElementById("extras");
-        extras.setAttribute("value",this.detailData.extras);
+        const extras = document.getElementById("extras") as HTMLSelectElement;
+        extras.setAttribute('multiple', 'true');
+        extras.style.setProperty('width', '15%');
+        extraOptions.forEach(extoption => {
+            let opt = document.createElement('option');
+            opt.value = extoption.value;
+            opt.id = extoption.value;
+            opt.textContent = extoption.viewValue;
+            if(this.detailData.extras && this.detailData.extras.length > 0){
+                const foundExtra = this.detailData.extras.find((extra: string) => extra === extoption.value);
+                if(foundExtra){
+                    opt.setAttribute("selected","selected");
+                }
+            }
+            extras.appendChild(opt);
+        })
+        
+        
         const payment = <HTMLInputElement>document.getElementById(this.detailData.payment);
         payment.setAttribute("checked","checked");
         const note = <HTMLInputElement>document.getElementById("note");
@@ -195,3 +225,9 @@ export class DetailsPopup{
         
 }
     
+/* html code for extras
+<option value="extraBreakfast" id="extraBreakfast">Breakfast</option>
+                    <option value="extraTV" id="extraTV">TV</option>
+                    <option value="extraWiFi" id="extraWiFi">WiFi</option>
+                    <option value="extraParking" id="extraParking">Parking</option>
+                    <option value="extraBalcony" id="extraBalcony">Balcony</option> */
