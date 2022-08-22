@@ -74,7 +74,6 @@ export class ResultList {
         resultRecordRowElement.addEventListener('click', (e) => {
             e.preventDefault();
             //popup details
-            console.log("popup details");
             const clickRecordRow = new CustomEvent('clickRecordRow', { detail: result });
             window.dispatchEvent(clickRecordRow);
         });

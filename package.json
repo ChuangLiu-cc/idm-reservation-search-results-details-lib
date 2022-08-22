@@ -1,6 +1,6 @@
 {
   "name": "idm-reservation-search-results-details-lib",
-  "version": "1.0.1",
+  "version": "1.0.10",
   "description": "search page, result list and popup details dialog",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
