@@ -8,6 +8,8 @@ export class ResultList {
         const el = document.createElement('div');
         if (data) {
             if (data.length == 0) {
+                if (container.firstChild)
+                    container.removeChild(container.firstChild);
                 el.innerHTML = `
                     <h2 class="warning-msg">Not Found!</h2>
                 `;
