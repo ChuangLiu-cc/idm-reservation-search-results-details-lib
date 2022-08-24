@@ -1,0 +1,15 @@
+import { MDCSelect } from '@material/select';
+export declare function NewMdcCheckbox(eleF: any, eleC: any): void;
+export declare function NewMdcSwitch(ele: any, isSelected: boolean): void;
+export declare function NewMdcChips(ele: any): void;
+export declare function NewMdcRadioButton(ele: any): void;
+export declare function NewMdcRadioButtonFormField(eleR: any, eleF: any): void;
+export declare function NewMdcMenus(ele: any): void;
+export declare function NewMdcTextCounter(ele: any): void;
+export declare function NewMdcTextHelperText(ele: any): void;
+export declare function NewMdcSelectHelperText(ele: any): void;
+export declare function NewMdcSelectComponent(ele: any, selectedValue: string): MDCSelect;
+export declare function NewMdcTextField(ele: any): void;
+export declare function NewMdcSelect(ele: any): void;
+export declare function NewMdcButton(ele: any): void;
+export declare function NewMdcDialog(): void;

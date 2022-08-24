@@ -1,3 +1,9 @@
+import {NewMdcSelectComponent, NewMdcButton, NewMdcSelect, NewMdcTextField} from './mdc-builder'
+//import {MDCTextField} from '@material/textfield';
+
+// function NewMdcTextField(ele: any){
+//     MDCTextField.attachTo(ele!);
+// }
 //interface for SearchElement
 interface SearchElement{
     name: string;
@@ -9,6 +15,7 @@ interface SearchElement{
     room: string;
 }
 export class SearchBar {
+    
     //get tag id in constructor
 
     //pass data to here, then filter data by search criteria
@@ -20,47 +27,162 @@ export class SearchBar {
     no_search_result: boolean = false;
     previous_search_params: SearchElement = {name:"", email:"", phone: "", note: "", arrival: "", departure: "", room: ""};
     search_params: SearchElement = {name:"", email:"", phone: "", note: "", arrival: "", departure: "", room: ""};
-
+    roomsize_selected: any;
     constructor(tid: string, data: any){
         //this.tagid = tid;
+        this.roomsize_selected = "";
         this.search_data = data;
         const queryValue = "#" + tid;
         const container = document.querySelector(queryValue)!;
         const el = document.createElement('div');
-        el.innerHTML = `
-            <input type="text" name="nameinput" id="nameinput" />
-            <input type="email" name="emailinput" id="emailinput" />
-            <input type="tel" name="phoneinput" id="phoneinput" />
-            <input type="text" name="noteinput" id="noteinput" />
-            <input type="date" name="arrival" id="arrivaldp" >
-            <input type="date" name="departure" id="departuredp" >
-            <select name="roomsize" id="roomsize">
-                <option value="business-suite">Business Suite</option>
-                <option value="presidential-suite">Presidential Suite</option>
-            </select>
 
-            <button id="searchbtn">Search</button>
-            <button id="clearbtn">Clear</button>
+        // <input type="text" name="nameinput" id="nameinput" />
+        // <input type="email" name="emailinput" id="emailinput" />
+        // <input type="tel" name="phoneinput" id="phoneinput" />
+        // <input type="text" name="noteinput" id="noteinput" />
+        // <input type="date" name="arrival" id="arrivaldp" >
+        // <input type="date" name="departure" id="departuredp" >
+        // <select name="roomsize" id="roomsize">
+        // <option value="business-suite">Business Suite</option>
+        // <option value="presidential-suite">Presidential Suite</option>
+        // </select>
+        // <button id="searchbtn">Search</button>
+        // <button id="clearbtn">Clear</button>
+        el.innerHTML = `
+            <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+            <div id="search-bar-top-row">
+                <label class="username mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="idm-username">Name</span>
+                    <input class="mdc-text-field__input" type="text" id="nameinput" aria-labelledby="idm-username">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <label class="email mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="idm-email">Email</span>
+                    <input class="mdc-text-field__input" type="email" id="emailinput" aria-labelledby="idm-email">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <label class="phone mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="idm-phone">Phone</span>
+                    <input class="mdc-text-field__input" type="tel" id="phoneinput" aria-labelledby="idm-phone">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <label class="note mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="idm-note">Note</span>
+                    <input class="mdc-text-field__input" type="text" id="noteinput" aria-labelledby="idm-note">
+                    <span class="mdc-line-ripple"></span>
+                </label>
+            </div>
+            <br />
+            <br />
+            <div id="search-bar-bottom-row">
+                <div>
+                    <input type="date" name="arrival" id="arrivaldp"/>
+                    <label for="arrivaldp" id="arrival-datepicker-label">Arrival Date</label>
+                </div>
+                <div>
+                    <input type="date" name="departure" id="departuredp"/>
+                    <label for="departuredp" id="departure-datepicker-label">Departure Date</label>
+                </div>
+                <div class="roomsize mdc-select">
+                    <div class="mdc-select__anchor">
+                        <i class="mdc-select__dropdown-icon"></i>
+                        <div class="mdc-select__selected-text" id="roomsize"></div>
+                        <span class="mdc-floating-label">Room Size</span>
+                        <span class="mdc-line-ripple"></span>
+                    </div>
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface">
+                        <ul class="mdc-list">
+                            <li class="mdc-list-item mdc-list-item--selected" data-value="" aria-selected="true"></li>
+                            <li class="mdc-list-item" data-value="business-suite">
+                            <span class="mdc-list-item__text">
+                                Business Suite
+                            </span
+                            </li>
+                            <li class="mdc-list-item" data-value="presidential-suite">
+                            <span class="mdc-list-item__text">
+                                Presidential Suite
+                            </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button id="searchbtn" class="searchbtn mdc-button mdc-button--raised mdc-button--leading">
+                    <span class="mdc-button__ripple"></span>
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">search</i>
+                    <span class="mdc-button__label">Search</span>
+                </button>
+                <button id="clearbtn" class="clearbtn mdc-button mdc-button--outlined mdc-button--icon-leading">
+                    <span class="mdc-button__ripple"></span>
+                    <i class="material-icons mdc-button__icon" aria-hidden="true">close</i>
+                    <span class="mdc-button__label">Clear</span>
+                </button>
+            </div>
+            
+            
         `;
         container?.appendChild(el);
+
         // const nameInput = <HTMLInputElement>document.getElementById("nameinput");
         // const emailInput = <HTMLInputElement>document.getElementById("emailinput");
         // const phoneInput = <HTMLInputElement>document.getElementById("phoneinput");
         // const noteInput = <HTMLInputElement>document.getElementById("noteinput");
-        // const arrivalDp = <HTMLInputElement>document.getElementById("arrivaldp");
-        // const departureDp = <HTMLInputElement>document.getElementById("departuredp");
-        // const roomsizeSelect = <HTMLInputElement>document.getElementById("roomsize");
+        const arrivalDatepickerLabel = <HTMLInputElement>document.getElementById("arrival-datepicker-label");
+        arrivalDatepickerLabel.style.setProperty("display","block");
+        const departureDatepickerLabel = <HTMLInputElement>document.getElementById("departure-datepicker-label");
+        departureDatepickerLabel.style.setProperty("display","block");
+        const searchBarTopRow = <HTMLDivElement>document.getElementById("search-bar-top-row");
+        searchBarTopRow.style.setProperty("display","flex");
+        searchBarTopRow.style.setProperty("justify-content","center");
+        searchBarTopRow.style.setProperty("align-items","center");
+        searchBarTopRow.style.setProperty("flex-direction","row");
+        searchBarTopRow.style.setProperty("padding-top","30px");
+        
+
+        const searchBarBottomRow = <HTMLDivElement>document.getElementById("search-bar-bottom-row");
+        searchBarBottomRow.style.setProperty("display","flex");
+        searchBarBottomRow.style.setProperty("justify-content","center");
+        searchBarBottomRow.style.setProperty("align-items","center");
+        searchBarBottomRow.style.setProperty("flex-direction","row");
+        searchBarBottomRow.style.setProperty("padding-bottom","20px");
+
+        const arrivalDatePicker = <HTMLInputElement>document.getElementById("arrivaldp");
+        arrivalDatePicker.style.setProperty("padding-top","20px");
+        arrivalDatePicker.style.setProperty("width","220px");
+        arrivalDatePicker.style.setProperty("margin-top","10px");
+
+        const departureDatePicker = <HTMLInputElement>document.getElementById("departuredp");
+        departureDatePicker.style.setProperty("padding-top","20px");
+        departureDatePicker.style.setProperty("width","220px");
+        departureDatePicker.style.setProperty("margin-top","10px");
         const searchBtnElement = document.querySelector('#searchbtn') as HTMLButtonElement;
         const clearBtnElement = document.querySelector('#clearbtn') as HTMLButtonElement;
         searchBtnElement.addEventListener('click', (e: Event) => {
             e.preventDefault();
             this.searchData();
         })
+        
         clearBtnElement.addEventListener('click', (e: Event) => {
             e.preventDefault();
             this.initSearchElement();
         })
+        this.buildMDC();
 
+    }
+    buildMDC(){
+        NewMdcTextField(document.querySelector('.username'));
+        NewMdcTextField(document.querySelector('.email'));
+        NewMdcTextField(document.querySelector('.phone'));
+        NewMdcTextField(document.querySelector('.note'));
+        this.roomsize_selected = NewMdcSelectComponent(document.querySelector('.roomsize'), "");
+        //NewMdcSelect(document.querySelector('.roomsize'));
+        NewMdcButton(document.querySelector('.searchbtn'));
+        NewMdcButton(document.querySelector('.clearbtn'));
     }
     initSearchElement() {
         const clearSearchResult = new CustomEvent("clearSearchResult", {detail: null});
@@ -76,7 +198,8 @@ export class SearchBar {
         const noteInputElement = document.querySelector('#noteinput') as HTMLInputElement;
         noteInputElement.value = "";
         const roomsizeElement = document.querySelector('#roomsize') as HTMLSelectElement;
-        roomsizeElement.value = "";
+        roomsizeElement.textContent = "";
+        this.roomsize_selected.value = "";
         const arrivalDpElement = document.querySelector('#arrivaldp') as HTMLInputElement;
         arrivalDpElement.value = "";
         const departureDpElement = document.querySelector('#departuredp') as HTMLInputElement;
@@ -95,13 +218,13 @@ export class SearchBar {
         this.search_params.phone = phoneInputElement.value;
         const noteInputElement = document.querySelector('#noteinput') as HTMLInputElement;
         this.search_params.note = noteInputElement.value;
-        const roomsizeElement = document.querySelector('#roomsize') as HTMLSelectElement;
-        this.search_params.room = roomsizeElement.value;
+        //const roomsizeElement = document.querySelector('#roomsize') as HTMLSelectElement;
+        this.search_params.room = this.roomsize_selected.value!;
         const arrivalDpElement = document.querySelector('#arrivaldp') as HTMLInputElement;
         this.search_params.arrival = arrivalDpElement.value;
         const departureDpElement = document.querySelector('#departuredp') as HTMLInputElement;
         this.search_params.departure = departureDpElement.value
-        if(!nameInputElement.value && !emailInputElement.value && !phoneInputElement.value && !noteInputElement.value && !roomsizeElement.value && !arrivalDpElement.value && !departureDpElement.value) return;
+        if(!nameInputElement.value && !emailInputElement.value && !phoneInputElement.value && !noteInputElement.value && !this.search_params.room && !arrivalDpElement.value && !departureDpElement.value) return;
         if(JSON.stringify(this.previous_search_params) === JSON.stringify(this.search_params)) return;
         //searching
         this.search_result = this.search_data.filter((d: any) => {
@@ -109,7 +232,7 @@ export class SearchBar {
             (emailInputElement.value ? this.isStringInclude(d.email, emailInputElement.value) : true) &&
             (phoneInputElement.value ? this.isStringInclude(d.phone, phoneInputElement.value) : true) &&
             (noteInputElement.value ? this.isStringInclude(d.note, noteInputElement.value) : true) &&
-            (roomsizeElement.value ? this.isStringInclude(d.room.roomSize, roomsizeElement.value) : true) &&
+            (this.search_params.room ? this.isStringInclude(d.room.roomSize, this.search_params.room) : true) &&
             (arrivalDpElement.value ? this.isDateEqual(d.stay.arrivalDate, arrivalDpElement.value) : true) &&
             (departureDpElement.value ? this.isDateEqual(d.stay.departureDate, departureDpElement.value) : true)
         });

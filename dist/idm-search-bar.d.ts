@@ -14,7 +14,9 @@ export declare class SearchBar {
     no_search_result: boolean;
     previous_search_params: SearchElement;
     search_params: SearchElement;
+    roomsize_selected: any;
     constructor(tid: string, data: any);
+    buildMDC(): void;
     initSearchElement(): void;
     searchData(): void;
     setSearchResult(result: any): void;

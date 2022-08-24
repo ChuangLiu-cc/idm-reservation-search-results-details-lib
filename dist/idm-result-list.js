@@ -21,6 +21,27 @@ export class ResultList {
                 data.forEach((result, index) => {
                     this.appendResult(result, index);
                 });
+                //style table and make cell to pointer
+                const resultTable = document.getElementById("result-list-table");
+                resultTable === null || resultTable === void 0 ? void 0 : resultTable.style.setProperty("font-family", "Arial, Helvetica, sans-serif");
+                resultTable === null || resultTable === void 0 ? void 0 : resultTable.style.setProperty("border-collapse", "collapse");
+                resultTable === null || resultTable === void 0 ? void 0 : resultTable.style.setProperty("padding-top", "30px");
+                resultTable === null || resultTable === void 0 ? void 0 : resultTable.style.setProperty("width", "100%");
+                const resultTableHeaderElements = document.getElementsByTagName("th");
+                for (let tableHeader of resultTableHeaderElements) {
+                    tableHeader.style.setProperty("padding-top", "12px");
+                    tableHeader.style.setProperty("padding-bottom", "12px");
+                    tableHeader.style.setProperty("text-align", "center");
+                    tableHeader.style.setProperty("background-color", "rgb(54, 140, 238)");
+                    tableHeader.style.setProperty("color", "white");
+                }
+                const resultTableCellElements = document.getElementsByTagName("td");
+                for (let tableCell of resultTableCellElements) {
+                    tableCell.style.setProperty("padding", "8px");
+                    tableCell.style.setProperty("border", "1px solid #ddd");
+                    tableCell.style.setProperty("cursor", "pointer");
+                    tableCell.style.setProperty("text-align", "center");
+                }
             }
         }
         else {
@@ -42,18 +63,18 @@ export class ResultList {
         this.tableid = this.generateTagID(containerTable.id);
         let containerTableHead = document.createElement('thead');
         containerTableHead.id = 'result-list-table-head';
-        let containerTablerTableHeaderRow = document.createElement('tr');
-        containerTablerTableHeaderRow.id = 'result-list-table-tr';
+        // let containerTablerTableHeaderRow = document.createElement('th');
+        // containerTablerTableHeaderRow.id = 'result-list-table-th';
         tableHeaders.forEach(header => {
             let tableHeader = document.createElement('th');
             tableHeader.innerText = header;
-            containerTablerTableHeaderRow.append(tableHeader);
+            containerTableHead.append(tableHeader);
         });
-        containerTableHead.append(containerTablerTableHeaderRow);
+        //containerTableHead.append(containerTablerTableHeaderRow);
         containerTable.append(containerTableHead);
-        let containerTableBody = document.createElement('tbody');
-        containerTableBody.id = "result-list-table-body";
-        containerTable.append(containerTableBody);
+        // let containerTableBody = document.createElement('tbody');
+        // containerTableBody.id = "result-list-table-body";
+        // containerTable.append(containerTableBody);
         container.append(containerTable);
         //return container;
     }
